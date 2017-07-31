@@ -1,0 +1,95 @@
+在java-type-notes中，对Type类型进行了简单的介绍；org.reflect.bootstrap包中的实例
+用于测试，Type相关的类型：
+原始类型(Class)、参数化类型(ParameterizedType)、数组类型(GenericArrayType)、
+类型变量(TypeVariable)、基本类型(Class)，以及通配符类型WildcardType 进一步说明；
+########################################################################
+1.ParameterizedType，see#org.reflect.bootstrap.ParameterizedTypeTest
+ParameterizedType表示参数化类型，也就是泛型，例如List<T>、Set<T>等；
+在ParameterizedType接口中，有3个方法，分别是getActualTypeArguments()、
+ getRawType()、 getOwnerType();
+1.1 getActualTypeArguments
+获取泛型中的实际类型，可能会存在多个泛型，例如Map<K,V>,所以会返回Type[]数组；
+值得注意的是，无论<>中有几层嵌套(List<Map<String,Integer>)，
+getActualTypeArguments()方法永远都是脱去最外层的<>(也就是List<>)，
+将口号内的内容（Map<String,Integer>）返回；
+我们经常遇到的List<T>，通过getActualTypeArguments()方法，
+得到的返回值是TypeVariableImpl对象，也就是TypeVariable类型(后面介绍);
+1.2 getRawType
+获取声明泛型的类或者接口，也就是泛型中<>前面的那个值；
+1.3 getOwnerType
+通过方法的名称，我们大概了解到，此方法是获取泛型的拥有者，那么拥有者是个什么意思？
+Returns a {@code Type} object representing the type that this type 
+* is a member of.  For example, if this type is {@code O.I},    
+* return a representation of {@code O}.  （摘自JDK注释）
+
+通过注解，我们得知，“拥有者”表示的含义--内部类的“父类”，
+通过getOwnerType()方法可以获取到内部类的“拥有者”；
+例如： Map  就是 Map.Entry<String,String>的拥有者；
+#######################################################################
+2.GenericArrayType,see#org.reflect.bootstrap.GenericArrayTypeTest,
+泛型数组类型，例如List<String>[] 、T[]等；
+在GenericArrayType接口中，仅有1个方法，就是getGenericComponentType()；
+2.1 getGenericComponentType
+返回泛型数组中元素的Type类型，即List<String>[] 
+中的 List<String>（ParameterizedTypeImpl）、T[] 中的T（TypeVariableImpl）；
+值得注意的是，无论是几维数组，getGenericComponentType()方法都只会脱去最右边的[]，
+返回剩下的值；
+#######################################################################
+3.TypeVariable,see#org.reflect.bootstrap.TypeVariableTest,TypeVariableGetBoundsTest,
+GenericDeclarationTest*;
+泛型的类型变量，指的是List<T>、Map<K,V>中的T，K，V等值，
+实际的Java类型是TypeVariableImpl（TypeVariable的子类）；
+此外，还可以对类型变量加上extend限定，这样会有类型变量对应的上限；
+在TypeVariable接口中，有3个方法，分别为getBounds()、getGenericDeclaration()、getName()；
+3.1 getBounds
+获得该类型变量的上限，也就是泛型中extend右边的值；
+例如 List<T extends Number> ，Number就是类型变量T的上限；
+如果我们只是简单的声明了List<T>（无显式定义extends），那么默认为Object；
+值得注意的是，类型变量的上限可以为多个，必须使用&符号相连接，
+例如 List<T extends Number & Serializable>；其中，& 后必须为接口；
+3.2 getGenericDeclaration
+获取声明该类型变量实体，也就是TypeVariableTest<T>中的TypeVariableTest；
+3.3 getName
+获取类型变量在源码中定义的名称；
+说到TypeVariable类，就不得不提及Java-Type体系中另一个比较重要的接口
+---GenericDeclaration；含义为：声明类型变量的所有实体的公共接口；
+也就是说该接口定义了哪些地方可以定义类型变量（泛型）；
+通过查看源码发现，GenericDeclaration下有三个子类，
+分别为Class、Method、Constructor；也就是说，我们定义泛型只能在一个类中这3个地方自定义泛型；
+此时，我们不禁要问，我们不是经常在类中的属性声明泛型吗，
+怎么Field没有实现 GenericDeclaration接口呢？
+其实，我们在Field中并没有声明泛型，而是在使用泛型而已,泛型的定义有一下几种形式：
+a.首先在Class上定义泛型;
+b.我们没有在Class上定义泛型，直接在构造方法上定义泛型;
+c.同样没有在Class定义泛型，直接在普通方法上定义泛型;
+我们直接在属性上定义,如果不在Class上定义，属性上并不能直接使用！
+所以，这也是我之前说的属性上并不是定义泛型，
+而是使用泛型，所以Field并没有实现GenericDeclaration接口！
+#################################################################
+4.Class,see#org.reflect.bootstrap.ClassTest
+Type接口的实现类，是我们工作中常用到的一个对象；在Java中，
+每个.class文件在程序运行期间，都对应着一个Class对象，
+这个对象保存有这个类的全部信息；因此，Class对象也称之为Java反射的基础；
+我们普通的对象就是一个Class类型，是Type中的一种；
+#################################################################
+5.WildcardType,see#org.reflect.bootstrap.WildcardTypeTest
+？---通配符表达式，表示通配符泛型，但是WildcardType并不属于Java-Type中的一种；
+例如：List<? extends Number> 和 List<? super Integer>；
+在WildcardType接口中，有2个方法，分别为getUpperBounds()、getLowerBounds();
+5.1 getUpperBounds
+获取泛型变量的上边界（extends）
+5.2 getLowerBounds
+获取泛型变量的下边界（super）
+######################################################################
+ 泛型通配符extends与super的区别：see#org.reflect.bootstrap.ExtendsSuperTest
+<? extends T>限定参数类型的上界：参数类型必须是T或T的子类型
+<? super T> 限定参数类型的下界：参数类型必须是T或T的超类型
+总结为：
+1. <? extends T> 只能用于方法返回，告诉编译器此返参的类型的最小继承边界为T，
+T和T的父类都能接收，但是入参类型无法确定，只能接受null的传入
+2.<? super T>只能用于限定方法入参，告诉编译器入参只能是T或其子类型，
+而返参只能用Object类接收
+3.? 既不能用于入参也不能用于返参
+
+
+
