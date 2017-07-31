@@ -26,7 +26,7 @@ Returns a {@code Type} object representing the type that this type
 通过getOwnerType()方法可以获取到内部类的“拥有者”；
 例如： Map  就是 Map.Entry<String,String>的拥有者；
 #######################################################################
-2.GenericArrayType,see#org.reflect.bootstrap.GenericArrayTypeTest,
+2.GenericArrayType,see#org.reflect.bootstrap.GenericArrayTypeTest
 泛型数组类型，例如List<String>[] 、T[]等；
 在GenericArrayType接口中，仅有1个方法，就是getGenericComponentType()；
 2.1 getGenericComponentType
