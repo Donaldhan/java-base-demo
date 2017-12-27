@@ -1,9 +1,9 @@
 # java-base-demo
 some examples to show java base knowledge
 
-#guide
-* [Java Type Framework](#Java Type Framework)
-* [URI&URL](#uri&url)
+# Guide  
+* [Java Type Framework](#Java Type Framework)  
+* [URI&URL](#uri&url)  
 
 
 ## Java Type Framework
