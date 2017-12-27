@@ -2,8 +2,8 @@
 some examples to show java base knowledge
 
 # Guide  
-* [Java Type Framework](#Java Type Framework)  
-* [URI&URL](#uri&url)  
+* [Java Type Framework](#java-type-framework)  
+* [URI&URL](#uri-url)  
 
 
 ## Java Type Framework
@@ -26,12 +26,12 @@ Class:see#org.reflect.bootstrap.ClassTest;
 WildcardType:see#org.reflect.bootstrap.WildcardTypeTest,ExtendsSuperTest.
 
 
-## URI&URL   
+## URI-URL   
 the URI and URL Test case in the *src/test/java/cn.home.uri*.   
-the difference between URI and URL, please refer to  [url-uri][] and [URL、URN、URI区别][] .
+the difference between URI and URL, please refer to  [url-uri][] and [URL、URN、URI区别](https://www.cnblogs.com/52php/p/5677645.html).
 
-[url-uri]: https://danielmiessler.com/study/url-uri/ "url-uri"  
-[URL、URN、URI区别]:https://www.cnblogs.com/52php/p/5677645.html "URL、URN、URI区别"
+[url-uri]: https://danielmiessler.com/study/url-uri/ "url-uri" 
+ 
 
 simplely as follows:  
 URI(Uniform Resource Identifier) include URL(Uniform Resource Locators ) or URN(Uniform Resource Names) , or both;  
