@@ -8,8 +8,8 @@ import org.slf4j.LoggerFactory;
 /**
  * @author donald 2018年1月11日 下午12:38:44
  */
-public class StringForamtBoot {
-	private static final Logger log = LoggerFactory.getLogger(StringForamtBoot.class);
+public class StringFormatBoot {
+	private static final Logger log = LoggerFactory.getLogger(StringFormatBoot.class);
 
 	public static void main(String[] args) {
 		String str = null;
