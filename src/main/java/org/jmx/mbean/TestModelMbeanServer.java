@@ -2,7 +2,6 @@ package org.jmx.mbean;
 
 import java.lang.management.ManagementFactory;
 
-import javax.management.Attribute;
 import javax.management.InstanceAlreadyExistsException;
 import javax.management.InstanceNotFoundException;
 import javax.management.MBeanException;
@@ -13,24 +12,24 @@ import javax.management.NotCompliantMBeanException;
 import javax.management.ObjectName;
 import javax.management.ReflectionException;
 
-import org.jmx.mbean.status.JvmDynamicStatus;
+import org.jmx.mbean.status.JvmModelStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 测试动态MBean
+ * 测试模板MBean
  * @author donald
  * 2018年1月23日
  * 下午12:51:24
  */
-public class TestDynamicMbeanServer {
-	private static Logger log = LoggerFactory.getLogger(TestDynamicMbeanServer.class);
+public class TestModelMbeanServer {
+	private static Logger log = LoggerFactory.getLogger(TestModelMbeanServer.class);
 	public static void main(String[] args) {
 		MBeanServer mbeanServer = ManagementFactory.getPlatformMBeanServer();
 		try {
-			ObjectName mbeanObjectName = new ObjectName("org.jmx.mbean:type=JvmDynamicStatus");
-			JvmDynamicStatus jvmDynamicStatus = new JvmDynamicStatus("JvmStatus");
-			mbeanServer.registerMBean(jvmDynamicStatus, mbeanObjectName);
+			ObjectName mbeanObjectName = new ObjectName("org.jmx.mbean:type=JvmModelStatus");
+			JvmModelStatus jvmModelStatus = new JvmModelStatus("JvmStatus");
+			mbeanServer.registerMBean(jvmModelStatus, mbeanObjectName);
 			/**
 			 * // doc comment inherited from MBeanServerConnection
 			 */
@@ -51,7 +50,7 @@ public class TestDynamicMbeanServer {
 			/**
 			 * 直接调用setApplicationName方法设置属性有效
 			 */
-			mbeanServer.invoke(mbeanObjectName, "setApplicationName",new Object[]{"JvmDynamicStatus"},new String[]{"java.lang.String"});
+			mbeanServer.invoke(mbeanObjectName, "setApplicationName",new Object[]{"JvmModelStatus"},new String[]{"java.lang.String"});
 			mbeanServer.invoke(mbeanObjectName, "printStatusInfo",null,null);
 			Thread.sleep(Long.MAX_VALUE);
 		} catch (InstanceAlreadyExistsException e) {

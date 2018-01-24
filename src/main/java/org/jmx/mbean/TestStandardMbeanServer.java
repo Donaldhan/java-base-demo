@@ -13,7 +13,6 @@ import javax.management.ObjectName;
 import javax.management.ReflectionException;
 
 import org.jmx.mbean.status.RunStatus;
-import org.jmx.mbean.status.RunStatusMBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

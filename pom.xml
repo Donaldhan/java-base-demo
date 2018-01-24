@@ -1,30 +1,22 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <organization>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<organization>
 		<name>Donald_Draper</name>
 		<url>http://donald-draper.iteye.com/blog</url>
-  </organization>
-  <groupId>org.donald</groupId>
-  <artifactId>java-base-demo</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>java-base-demo</name>
-  <description>java type framework demo</description>
-  <properties>
+	</organization>
+	<groupId>org.donald</groupId>
+	<artifactId>java-base-demo</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>java-base-demo</name>
+	<description>java type framework demo</description>
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 		<slf4j.version>1.7.19</slf4j.version>
 	</properties>
 	<repositories>
-	<!-- 	<repository>
-			<id>nexus</id>
-			<name>local nexus server</name>
-			<url>http://192.168.32.128:8081/nexus/content/groups/public</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</repository> -->
 		<repository>
 			<id>maven.aliyun.com</id>
 			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
@@ -42,6 +34,11 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jdmk</groupId>
+			<artifactId>jmxtools</artifactId>
+			<version>1.2.1</version>
 		</dependency>
 	</dependencies>
 	<build>
