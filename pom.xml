@@ -36,18 +36,23 @@
 			<version>${slf4j.version}</version>
 			<scope>compile</scope>
 		</dependency>
+
+		<!-- HTML agent -->
 		<dependency>
 			<groupId>com.sun.jdmk</groupId>
 			<artifactId>jmxtools</artifactId>
 			<version>1.2.1</version>
 		</dependency>
-		<!-- tomcat remote jmx monitor
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-catalina-jmx-remote</artifactId>
-			<version>9.0.4</version>
-		</dependency> 
-		-->
+			<artifactId>juli</artifactId>
+			<version>6.0.53</version>
+		</dependency>
+		<dependency>
+			<groupId>org.softee</groupId>
+			<artifactId>pojo-mbean</artifactId>
+			<version>1.1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

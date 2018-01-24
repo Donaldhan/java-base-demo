@@ -16,8 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 基于Xml对需要暴露的接口进行配置：这个要结合TOMCAT的JMX体系使用， 具体配置见mbeans-descriptor.xml
- * 
+ * 基于Xml对需要暴露的接口进行配置：这个要结合TOMCAT的JMX体系使用， 具体配置见mbeans-descriptor.xml.
+ * 此类暂不可用。
  * @author donald 2018年1月24日 上午9:45:15
  */
 public class TestModelAgentBaseXml {
@@ -30,8 +30,7 @@ public class TestModelAgentBaseXml {
 		try {
 			mBeanServer = registry.getMBeanServer();
 		} catch (Throwable t) {
-			t.printStackTrace(System.out);
-			System.exit(1);
+			log.error("获取MBeanServer异常：",t);
 		}
 	}
 
@@ -49,7 +48,7 @@ public class TestModelAgentBaseXml {
 			stream.close();
 
 		} catch (Throwable t) {
-			System.out.println(t.toString());
+			log.error("创建bean,加载mbeans-descriptor异常",t);
 		}
 		return registry;
 	}
@@ -62,7 +61,7 @@ public class TestModelAgentBaseXml {
 	public ModelMBean createModelMBean(String mBeanName) throws Exception {
 		ManagedBean managed = registry.findManagedBean(mBeanName);
 		if (managed == null) {
-			System.out.println("ManagedBean null");
+			log.info("ManagedBean is null");
 			return null;
 		}
 		ModelMBean mbean = (ModelMBean) managed.createMBean();
@@ -79,7 +78,7 @@ public class TestModelAgentBaseXml {
 		try {
 			objectName = new ObjectName(domain + ":type="+objName);
 		} catch (MalformedObjectNameException e) {
-			e.printStackTrace();
+			log.error("创建ObjectName异常",e);
 		}
 		return objectName;
 	}
@@ -89,14 +88,14 @@ public class TestModelAgentBaseXml {
 		MBeanServer mBeanServer = agent.getMBeanServer();
 		RunStatus runStatus = new RunStatus("home", Runtime.getRuntime().availableProcessors(),
 				Runtime.getRuntime().freeMemory());
-		System.out.println("Creating ObjectName");
+		log.info("Creating ObjectName");
 		ObjectName objectName = agent.createObjectName("RunStatus");
 		try {
 			ModelMBean modelMBean = agent.createModelMBean("runStatus");
 			modelMBean.setManagedResource(runStatus, "org.jmx.mbean.status.RunStatus");
 			mBeanServer.registerMBean(modelMBean, objectName);
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			log.error("模板MBean注册异常：",e);
 		}
 		// manage the bean
 		try {
