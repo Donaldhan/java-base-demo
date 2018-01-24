@@ -161,3 +161,4 @@ RMI或者JMX可以参考
 关于基于XMl的配置，可以基于TOMCAT和JBOSS，JETTY，WEB-LOGIC参见
 [Tomcat7中的JMX使用（二）Dynamic MBean](http://blog.csdn.net/caomiao2006/article/details/51527665)
 [JMX一步步来]　9、基于JBoss来写MBean](http://damies.iteye.com/blog/51808)
+[tomcat  mbeans-descriptor.xml](http://jgo.shenhe.gov.cn/docs/mbeans-descriptor-howto.html)

@@ -8,6 +8,7 @@
 	<groupId>org.donald</groupId>
 	<artifactId>java-base-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>java-base-demo</name>
 	<description>java type framework demo</description>
 	<properties>
@@ -40,6 +41,13 @@
 			<artifactId>jmxtools</artifactId>
 			<version>1.2.1</version>
 		</dependency>
+		<!-- tomcat remote jmx monitor
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-catalina-jmx-remote</artifactId>
+			<version>9.0.4</version>
+		</dependency> 
+		-->
 	</dependencies>
 	<build>
 		<plugins>
@@ -55,4 +63,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>

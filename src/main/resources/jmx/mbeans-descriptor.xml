@@ -4,15 +4,17 @@
  "http://jakarta.apache.org/commons/dtds/mbeans-descriptors.dtd">  
   
 <mbeans-descriptors>  
-    <mbean name="myMBean" className="org.jmx.mbean.status.RunStatusMBean"  
+    <mbean name="runStatus" className="org.jmx.mbean.status.RunStatusMBean"  
         type="org.jmx.mbean.status.RunStatus">  
         <attribute name="applicationName" type="java.lang.String" />  
         <attribute name="memerySize" type="java.lang.Long" />
         <attribute name="coreCpuProssors" type="java.lang.Integer" />
-        <attribute name="statusInfo" type="java.lang.String" />  
+        <attribute name="statusInfo" type="java.lang.String" writeable="false"/>  
         <operation name="printStatusInfo" impact="ACTION" returnType="void"/>  
+        <!-- 
         <operation name="StatusInfo" impact="INFO" returnType="java.lang.String">  
             <parameter name="statusType" type="java.lang.String" />  
-        </operation>  
+        </operation>   
+        -->
     </mbean>  
 </mbeans-descriptors> 
